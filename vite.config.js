@@ -1,7 +1,9 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { visualizer } from 'rollup-plugin-visualizer'
-import path from 'path'
+import { resolve } from 'path'
+
+const __dirname = import.meta.dirname
 
 export default defineConfig({
   base: './',
@@ -16,10 +18,10 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
-      '@/domain': path.resolve(__dirname, 'src/domain'),
-      '@/app': path.resolve(__dirname, 'src/app'),
-      '@/ui': path.resolve(__dirname, 'src/ui'),
+      '@': resolve(__dirname, 'src'),
+      '@/domain': resolve(__dirname, 'src/domain'),
+      '@/app': resolve(__dirname, 'src/app'),
+      '@/ui': resolve(__dirname, 'src/ui'),
     },
   },
   build: {

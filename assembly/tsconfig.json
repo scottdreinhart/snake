@@ -1,7 +1,31 @@
 {
-  "extends": "assemblyscript/std/assembly.json",
   "compilerOptions": {
-    "ignoreDeprecations": "6.0"
+    "target": "esnext",
+    "module": "commonjs",
+    "noLib": true,
+    "allowJs": false,
+    "strict": true,
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noEmitOnError": true,
+    "strictNullChecks": true,
+    "experimentalDecorators": true,
+    "preserveConstEnums": false,
+    "downlevelIteration": true,
+    "ignoreDeprecations": "6.0",
+    "typeRoots": [
+      "../node_modules/assemblyscript/std/types"
+    ],
+    "types": [
+      "assembly"
+    ],
+    "paths": {
+      "*": [
+        "../node_modules/assemblyscript/std/assembly/*"
+      ]
+    }
   },
   "include": [
     "./**/*.ts"

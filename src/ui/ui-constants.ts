@@ -1,10 +1,13 @@
 /**
  * UI layout constants — sizes, breakpoints, timing values.
+ * Breakpoint values derived from the central responsive system.
  */
 
+import { RESPONSIVE_BREAKPOINTS } from '@/domain/responsive'
+
 export const BREAKPOINTS = {
-  sm: 375,
-  md: 600,
-  lg: 900,
-  xl: 1200,
+  sm: RESPONSIVE_BREAKPOINTS.sm,
+  md: RESPONSIVE_BREAKPOINTS.md,
+  lg: RESPONSIVE_BREAKPOINTS.lg,
+  xl: RESPONSIVE_BREAKPOINTS.xl,
 } as const

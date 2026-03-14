@@ -4,6 +4,7 @@
  */
 
 export const COLOR_THEMES = [
+  'chiba',
   'classic',
   'ocean',
   'sunset',
@@ -27,7 +28,7 @@ export const COLORBLIND_MODES = [
 export type ColorblindMode = (typeof COLORBLIND_MODES)[number]
 
 export const DEFAULT_SETTINGS = {
-  colorTheme: 'highcontrast' as ColorTheme,
+  colorTheme: 'chiba' as ColorTheme,
   mode: 'system' as Mode,
   colorblind: 'none' as ColorblindMode,
 }

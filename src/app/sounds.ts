@@ -35,8 +35,21 @@ export function playConfirm(): void {
   setTimeout(() => playTone(659, 0.1, 'triangle', 0.2), 80)
 }
 
-export function playCpuMove(): void {
-  playTone(330, 0.15, 'square', 0.1)
+export function playEat(): void {
+  playTone(587, 0.06, 'square', 0.12)
+  setTimeout(() => playTone(784, 0.08, 'square', 0.15), 50)
+}
+
+export function playPowerUp(): void {
+  const notes = [523, 659, 784]
+  notes.forEach((freq, i) => {
+    setTimeout(() => playTone(freq, 0.1, 'triangle', 0.18), i * 60)
+  })
+}
+
+export function playCrash(): void {
+  playTone(120, 0.3, 'sawtooth', 0.2)
+  setTimeout(() => playTone(80, 0.4, 'sawtooth', 0.15), 100)
 }
 
 export function playWin(): void {
@@ -53,4 +66,12 @@ export function playLose(): void {
 
 export function playClick(): void {
   playTone(1200, 0.04, 'sine', 0.1)
+}
+
+export function playPause(): void {
+  playTone(440, 0.06, 'triangle', 0.1)
+}
+
+export function playResume(): void {
+  playTone(660, 0.06, 'triangle', 0.1)
 }

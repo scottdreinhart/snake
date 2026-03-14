@@ -1,0 +1,78 @@
+.hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  color: var(--fg, #e0e0e0);
+  gap: 1rem;
+}
+
+.score {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.label {
+  opacity: 0.6;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.powerUp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.shield {
+  background: rgba(0, 187, 255, 0.2);
+  color: #00bbff;
+}
+
+.phase {
+  background: rgba(170, 102, 255, 0.2);
+  color: #aa66ff;
+}
+
+.boost {
+  background: rgba(255, 102, 0, 0.2);
+  color: #ff6600;
+}
+
+.modeLabel {
+  opacity: 0.4;
+  font-size: 0.7rem;
+}
+
+.wasmBadge {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.05rem 0.3rem;
+  border-radius: 3px;
+  background: rgba(0, 255, 136, 0.15);
+  color: #00ff88;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  vertical-align: middle;
+}
+
+.wrapBadge {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.05rem 0.3rem;
+  border-radius: 3px;
+  background: rgba(102, 126, 234, 0.2);
+  color: var(--accent, #667eea);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  vertical-align: middle;
+}

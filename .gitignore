@@ -40,3 +40,6 @@ ios/
 # Misc
 *.tgz
 .cache/
+
+# Platform tracking (local-only)
+.node-platform.md

@@ -48,7 +48,6 @@ src/
 │   ├── storageService.ts             # localStorage JSON wrapper (load<T>/save/remove)
 │   ├── ThemeContext.tsx              # React Context provider for theme/mode/colorblind settings
 │   ├── SoundContext.tsx              # React Context provider for sound state + guarded playback
-│   ├── useTheme.ts                   # Theme / mode / colorblind persistence + DOM sync
 │   ├── useSoundEffects.ts            # Sound toggle + play functions (respects reduced-motion)
 │   ├── use*.ts                       # Additional React hooks for state & effects
 │   └── index.ts                      # Barrel export — re-exports all app hooks and services
@@ -107,6 +106,7 @@ scripts/
 .prettierrc                           # Prettier formatting rules
 .gitignore                            # Git ignore rules
 .nvmrc                                # Node.js version pin (v24)
+.node-platform.md                     # Tracks current node_modules platform (linux|windows) — gitignored
 ```
 
 ## Getting Started
@@ -116,11 +116,21 @@ scripts/
 - [Node.js](https://nodejs.org/) v24+ (pin via [nvm](https://github.com/nvm-sh/nvm) — see `.nvmrc`)
 - [pnpm](https://pnpm.io/) v10+
 
+### WSL / NTFS Platform Note
+
+This repo lives on NTFS and is accessed from both PowerShell and WSL.
+Native binaries in `node_modules/` are platform-specific. A `.node-platform.md`
+file tracks which platform's binaries are currently installed (`linux` or `windows`).
+
+When switching shells, delete `node_modules/`, reinstall, and update the tracking file.
+See [AGENTS.md](AGENTS.md) §10 for the full procedure.
+
 ### Install & Run
 
 ```bash
-# Install dependencies
+# Install dependencies (retry once if EACCES race on NTFS)
 pnpm install
+pnpm rebuild        # generate .bin/ symlinks (required on WSL/NTFS)
 
 # Start development server (accessible on LAN via 0.0.0.0)
 pnpm start          # quick alias — vite --host
@@ -192,9 +202,10 @@ This project enforces nine complementary design principles:
 
 5. **Import Boundary Enforcement** (`eslint-plugin-boundaries`)
    - `domain/` → may only import from `domain/` (zero framework deps)
-   - `app/` → may import `domain/` + `app/` (never `ui/`)
+   - `app/` → may import `domain/`, `app/`, `wasm/` (never `ui/`)
    - `ui/` → may import `domain/`, `app/`, and `ui/` (full downstream access)
-   - `workers/` → may only import `domain/` (pure computation)
+   - `workers/` → may import `domain/` and `wasm/` (pure computation)
+   - `wasm/` → may only import from `wasm/` (self-contained loader)
    - `themes/` → may not import anything (pure CSS data)
    - **Benefit**: CLEAN layer violations are caught at lint time, not at code review
 
@@ -297,7 +308,7 @@ The following monetization and sustainability strategies are under consideration
 - [ ] **Victory effects** — premium win-line and celebration animations (fireworks, sparkle cascade, lightning strike) triggered on game-winning moves.
 - [ ] **Sound packs** — alternative synthesized SFX suites (retro 8-bit, orchestral, lo-fi) that replace the default Web Audio API sound set.
 
-> **Justification:** Microtransaction-based eGoods leverage the existing theme architecture — the CSS variable system, lazy-loaded theme chunks, and `useTheme` context already support hot-swapping visual styles at runtime. This makes the marginal engineering cost of each new theme near zero while the perceived user value remains high. Cosmetic-only purchases avoid pay-to-win dynamics and align with platform store guidelines (Apple App Store, Google Play) that discourage gameplay-gating IAPs.
+> **Justification:** Microtransaction-based eGoods leverage the existing theme architecture — the CSS variable system, lazy-loaded theme chunks, and `useThemeContext` hook already support hot-swapping visual styles at runtime. This makes the marginal engineering cost of each new theme near zero while the perceived user value remains high. Cosmetic-only purchases avoid pay-to-win dynamics and align with platform store guidelines (Apple App Store, Google Play) that discourage gameplay-gating IAPs.
 ---
 
 ## Portfolio Services
@@ -360,6 +371,29 @@ If you have been granted contributor access:
 
 See the [LICENSE](LICENSE) file for usage restrictions.
 
+
+## Governance Adoption
+
+This project adheres to a standardized governance framework. The governance package includes:
+
+### Security
+- **ESLint Security Rules** — 8 XSS/injection detection rules (`eslint-plugin-security`)
+- Reference: [Security Guidelines](./.github/instructions/10-security.instructions.md)
+
+### Accessibility
+- **WCAG AA Compliance** — 30+ accessibility guidelines
+- Reference: [Accessibility Guidelines](./.github/instructions/09-wcag-accessibility.instructions.md)
+
+### Quality Standards
+- **Error Handling** — ErrorBoundary component for graceful error recovery
+- **Performance Monitoring** — Web Vitals tracking via `usePerformanceMetrics` hook
+- **Mobile Gestures** — Swipe/longpress gesture handlers
+- **Commit Convention** — Commitizen integration for structured commit messages
+
+### See Also
+- Development Build & Deployment: [01-build.instructions.md](./.github/instructions/01-build.instructions.md)
+- Performance Guidelines: [11-performance.instructions.md](./.github/instructions/11-performance.instructions.md)
+- Error Handling Pattern: [12-error-handling.instructions.md](./.github/instructions/12-error-handling.instructions.md)
 ## License
 
 Copyright © 2026 Scott Reinhart. All Rights Reserved.

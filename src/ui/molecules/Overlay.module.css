@@ -1,0 +1,396 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 100;
+  padding: 2rem;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--accent, #667eea), #ff6b9d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 1rem;
+  opacity: 0.6;
+  margin-bottom: 2rem;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 260px;
+}
+
+.menuBtn {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--fg, #e0e0e0);
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    transform 0.1s;
+  text-align: center;
+}
+
+.menuBtn:hover,
+.menuBtn:focus-visible {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--accent, #667eea);
+  outline: none;
+}
+
+.menuBtn:active {
+  transform: scale(0.97);
+}
+
+.menuBtnPrimary {
+  composes: menuBtn;
+  background: var(--accent, #667eea);
+  color: #fff;
+  border-color: transparent;
+  font-weight: 600;
+}
+
+.menuBtnPrimary:hover,
+.menuBtnPrimary:focus-visible {
+  background: var(--accent, #667eea);
+  filter: brightness(1.15);
+  border-color: transparent;
+}
+
+.selectorRow {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.selectorBtn {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--fg, #e0e0e0);
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+
+.selectorBtn:hover,
+.selectorBtn:focus-visible {
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+}
+
+.selectorBtnActive {
+  composes: selectorBtn;
+  background: var(--accent, #667eea);
+  color: #fff;
+  border-color: var(--accent, #667eea);
+}
+
+.label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.5;
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.toggleBtn {
+  composes: selectorBtn;
+  min-width: 80px;
+}
+
+.toggleBtnOn {
+  composes: toggleBtn;
+  background: var(--accent, #667eea);
+  color: #fff;
+  border-color: var(--accent, #667eea);
+}
+
+.scoreDisplay {
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+  color: var(--accent, #667eea);
+}
+
+.statsRow {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin: 0.5rem 0;
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.controls {
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  opacity: 0.4;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.helpText {
+  max-width: 400px;
+  text-align: left;
+  line-height: 1.7;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.helpText h3 {
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+  color: var(--accent, #667eea);
+  font-size: 1rem;
+}
+
+.helpText ul {
+  padding-left: 1.2rem;
+}
+
+.helpText kbd {
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  font-family: 'Courier New', monospace;
+  font-size: 0.85em;
+}
+
+/* ─── Hamburger Menu ─────────────────────────────────────── */
+
+.hamburger {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0.5rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 110;
+  transition: border-color 0.15s;
+}
+
+.hamburger:hover,
+.hamburger:focus-visible {
+  border-color: var(--accent, #667eea);
+  outline: none;
+}
+
+.hamburgerBar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--fg, #e0e0e0);
+  border-radius: 1px;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 3.5rem;
+  right: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  min-width: 160px;
+  background: rgba(30, 30, 50, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 110;
+  animation: fadeIn 0.12s ease-out;
+}
+
+.dropdownItem {
+  padding: 0.7rem 1rem;
+  background: transparent;
+  border: none;
+  color: var(--fg, #e0e0e0);
+  font-size: 0.9rem;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.12s;
+}
+
+.dropdownItem:hover,
+.dropdownItem:focus-visible {
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+}
+
+.dropdownItem + .dropdownItem {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ─── Settings scroll container ──────────────────────────── */
+
+.settingsScroll {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+/* ─── Splash Screen ──────────────────────────────────────── */
+
+.splash {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg, #1a1a2e);
+  z-index: 200;
+  cursor: pointer;
+  animation: splashIn 0.6s ease-out;
+  transition:
+    opacity 0.5s ease-in,
+    transform 0.5s ease-in;
+}
+
+.splashExit {
+  opacity: 0;
+  transform: scale(1.05);
+}
+
+@keyframes splashIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.splashLogo {
+  margin-bottom: 1.5rem;
+  animation: logoPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.3));
+  }
+  50% {
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.6));
+  }
+}
+
+.splashSnake {
+  display: block;
+}
+
+.splashSegment {
+  animation: segPop 0.4s ease-out both;
+}
+
+@keyframes segPop {
+  from {
+    r: 0;
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.splashTitle {
+  font-size: 3.5rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  background: linear-gradient(135deg, var(--accent, #667eea), #ff6b9d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: titleSlide 0.8s ease-out 0.3s both;
+}
+
+@keyframes titleSlide {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.splashTagline {
+  font-size: 1rem;
+  opacity: 0;
+  color: var(--fg, #e0e0e0);
+  animation: titleSlide 0.6s ease-out 0.8s both;
+  margin-top: 0.5rem;
+}
+
+.splashHint {
+  position: absolute;
+  bottom: 2rem;
+  font-size: 0.75rem;
+  opacity: 0;
+  color: var(--fg, #e0e0e0);
+  animation: hintBlink 1.2s ease-in-out 1.8s infinite;
+}
+
+@keyframes hintBlink {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
