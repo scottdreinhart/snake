@@ -3,6 +3,7 @@ import tseslint from 'typescript-eslint'
 import reactPlugin from 'eslint-plugin-react'
 import reactHooksPlugin from 'eslint-plugin-react-hooks'
 import jsxA11yPlugin from 'eslint-plugin-jsx-a11y'
+import securityPlugin from 'eslint-plugin-security'
 import prettierConfig from 'eslint-config-prettier'
 import boundaries from 'eslint-plugin-boundaries'
 
@@ -16,6 +17,7 @@ export default [
       react: reactPlugin,
       'react-hooks': reactHooksPlugin,
       'jsx-a11y': jsxA11yPlugin,
+      security: securityPlugin,
       boundaries,
     },
     languageOptions: {
@@ -33,6 +35,7 @@ export default [
         { type: 'app', pattern: 'src/app/*' },
         { type: 'ui', pattern: 'src/ui/*' },
         { type: 'workers', pattern: 'src/workers/*' },
+        { type: 'wasm', pattern: 'src/wasm/*' },
         { type: 'themes', pattern: 'src/themes/*' },
       ],
     },
@@ -96,6 +99,25 @@ export default [
       eqeqeq: ['error', 'always'],
       curly: ['error', 'all'],
 
+      // ── Security (XSS, Injection, Crypto) ──
+      'security/detect-object-injection': 'warn',
+      'security/detect-non-literal-regexp': 'warn',
+      'security/detect-unsafe-regex': 'error',
+      'security/detect-buffer-noassert': 'error',
+      'security/detect-child-process': 'warn',
+      'security/detect-no-csrf-before-method-override': 'warn',
+      'security/detect-non-literal-fs-filename': 'warn',
+      'security/detect-non-literal-require': 'warn',
+
+      // ── React + DOM Safety ──
+      'react/no-danger': 'error',
+      'react/no-danger-with-children': 'error',
+
+      // ── Performance & Bundle ──
+      // 'react/require-render-return': 'error', // Disabled: compat issue with flat config
+      'react/no-children-prop': 'error',
+      'react/no-array-index-key': 'warn',
+
       // ── CLEAN Architecture Boundaries ──
       'boundaries/element-types': [
         'error',
@@ -103,9 +125,10 @@ export default [
           default: 'disallow',
           rules: [
             { from: 'domain', allow: ['domain'] },
-            { from: 'app', allow: ['domain', 'app'] },
+            { from: 'app', allow: ['domain', 'app', 'wasm'] },
             { from: 'ui', allow: ['domain', 'app', 'ui'] },
-            { from: 'workers', allow: ['domain'] },
+            { from: 'workers', allow: ['domain', 'wasm'] },
+            { from: 'wasm', allow: ['wasm'] },
             { from: 'themes', allow: [] },
           ],
         },
